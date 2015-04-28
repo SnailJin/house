@@ -187,7 +187,7 @@ AWS_ACCESS_KEY_ID = 'AKIAI4FL6KRW6QR2GBRA'
 AWS_SECRET_ACCESS_KEY = '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'
 EMAIL_BACKEND = 'django_ses.SESBackend'
 
-WEBSITE=""
+WEBSITE="http://ec2-52-68-188-233.ap-northeast-1.compute.amazonaws.com"
 PublicWeiXinAppID="wx0fa8047ebccc831f"
 PublicWeiXinAppSecret="34382631530580dc1c08670835bf5226"
 PublicWeiXinRedirectUri="%s/agent/public_weixin_authorization/"%(WEBSITE)
@@ -196,49 +196,48 @@ PublicWeiXinRedirectUri="%s/agent/public_weixin_authorization/"%(WEBSITE)
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE=60*60*12
 # 本地环境
-DATABASES = {
-                                      
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'weixin',                      # Or path to database file if using sqlite3.
-                                                # The following settings are not used with sqlite3:
-        'USER': 'root',                         #pinloveteam
-        'PASSWORD': 'jin521436',                       #redyellowblue123#
-        'HOST': '',                             # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',      
-                                                # Set to empty string for default.
-    }
-}
-MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(os.path.dirname(PATH),'update').replace('\\','/')
-STATIC_ROOT = os.path.join(PATH,'static').replace('\\','/')
-DEBUG = True
-TEMPLATE_DEBUG = True
+# DATABASES = {
+#                                       
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'weixin',                      # Or path to database file if using sqlite3.
+#                                                 # The following settings are not used with sqlite3:
+#         'USER': 'root',                         #pinloveteam
+#         'PASSWORD': 'jin521436',                       #redyellowblue123#
+#         'HOST': '',                             # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#         'PORT': '',      
+#                                                 # Set to empty string for default.
+#     }
+# }
+# MEDIA_URL = '/media/'
+# STATIC_URL = '/static/'
+# MEDIA_ROOT = os.path.join(os.path.dirname(PATH),'update').replace('\\','/')
+# STATIC_ROOT = os.path.join(PATH,'static').replace('\\','/')
+# DEBUG = True
+# TEMPLATE_DEBUG = True
 
 #---服务器环境-----
-# DEBUG = False
-# TEMPLATE_DEBUG = DEBUG
-# DATABASES = {
-#                                           
-#       'default': {
-#           'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#           'NAME': 'pinlove_db_1',                      # Or path to database file if using sqlite3.
-#                                                   # The following settings are not used with sqlite3:
-#           'USER': 'pinloveteam',
-#           'PASSWORD': 'redyellowblue123#',
-#           'HOST': '',                             # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-#           'PORT': '',                             # Set to empty string for default.
-#           'OPTIONS':{'init_command':'SET storage_engine=INNODB,character_set_connection=utf8,collation_connection=utf8_unicode_ci',},
-#       }
-#   }
-# #upload 上传地址
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT =os.path.join(os.path.dirname(PATH),'update').replace('\\','/')
-# #静态文件地址
-# STATIC_ROOT = os.path.join(PATH,'static').replace('\\','/')
-# STATIC_URL = '/static/'
-# DOMAIN='pinlove.com'
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+DATABASES = {
+                                           
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+          'NAME': 'weixin',                      # Or path to database file if using sqlite3.
+                                                  # The following settings are not used with sqlite3:
+          'USER': 'root',
+          'PASSWORD': 'jin521436',
+          'HOST': '',                             # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+          'PORT': '',                             # Set to empty string for default.
+          'OPTIONS':{'init_command':'SET storage_engine=INNODB,character_set_connection=utf8,collation_connection=utf8_unicode_ci',},
+      }
+  }
+#upload 上传地址
+MEDIA_URL = '/media/'
+MEDIA_ROOT =os.path.join(os.path.dirname(PATH),'update').replace('\\','/')
+#静态文件地址
+STATIC_ROOT = os.path.join(PATH,'static').replace('\\','/')
+STATIC_URL = '/static/'
 
 if __name__=='__main__':
     print os.path.join(os.path.dirname(PATH))
