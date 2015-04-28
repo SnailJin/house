@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/app.css"/>
+    <title>全民经纪人</title>
+    <style>
+        body{
+            background-color: rgb(235, 235, 235);
+        }
+        .error{
+            color: red;
+            font-size: smaller;
+        }
+        .container{
+            margin-top: 20px;
+        }
+
+        button{
+            margin-top: 30px;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<form method="POST" action="/agent/add_client/">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row" >
+            <center><h3>添加客户</h3></center>
+        </div>
+        <div class="form-group row" >
+            <div class="col-xs-4">
+                <label>姓名:</label>
+            </div>
+            <div class="col-xs-8">
+                {{clientForm.username}}
+                {%if clientForm.username.errors%}
+                <label class="error" for="inputError2">{{clientForm.username.errors.0}}</label>
+                {%endif%}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-4">
+                <label>身份证:</label>
+            </div>
+            <div class="col-xs-8">
+                {{clientForm.IDCard}}
+                {%if clientForm.IDCard.errors%}
+                <label class="error" for="inputError2">{{clientForm.IDCard.errors.0}}</label>
+                {%endif%}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-4">
+                <label>性别</label>
+            </div>
+            {% for choice in clientForm.gender.field.choices %}
+            <div class="col-xs-3">
+                <input type="radio" id="id_{{ user_form.gender.html_name }}_{{ forloop.counter0 }}" value="{{ choice.0 }}" name="gender" {%ifequal forloop.counter 1 %}checked="checked"{%endifequal%}/>
+                {{ choice.1 }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-4">
+                <label>手机号码</label>
+            </div>
+            <div class="col-xs-8">
+                {{clientForm.phone}}
+                {%if clientForm.phone.errors%}
+                <label class="error" for="inputError2">{{clientForm.phone.errors.0}}</label>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success">提交信息</button>
+</form>
+</body>
+</html>

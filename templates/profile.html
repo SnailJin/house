@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/app.css"/>
+    <title>全民经纪人</title>
+    <style>
+        body{
+            background-color: rgb(235, 235, 235);
+        }
+        .container>.row{
+            background-color: white;
+            margin: 20px 0px 20px 20px;
+            padding-top: 10px;
+        }
+        .avatar{
+            border-radius: 20px;
+        }
+        .line{
+            width: 100%;
+            height: 1.5px;
+            font-size: 0px;
+            background-color:  rgb(235, 235, 235);
+            margin-bottom: 8px;
+        }
+        p,font{
+            font-size: small;
+            line-height: 9px;
+        }
+        center>button{
+            margin-top: 30px;
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-3">
+            <img class="avatar" src="./img/image001.png" width="60px"  height="60px">
+        </div>
+        <div class="col-xs-9">
+            <div class="row">
+                <p class="username">{{username}}</p>
+                <p class="phone">{{phone}}</p>
+                <div class="line"></div>
+                <p >推荐人数<font style="color: red" class="recommend_num">{{recommendCount}}</font>人</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+           <p class="client">我的客户<font style="float: right;color: red;">&#62; </font></p>
+            <div class="line"></div>
+            {%for client in clientList %}
+            <p>{{client.username}}</p>
+            <div class="line"></div>
+            {%endfor%}
+            {%if more%}
+            <p class="client">更多</p>
+            {%endif%}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12" id="bind_account" >
+            <p>绑定账户<font style="float: right;color: red;">&#62; </font></p>
+        </div>
+    </div>
+    <center><button id="recommed_client" class="btn btn-danger">推荐客户</button></center>
+</div>
+<script>
+    $(function(){
+        $('.client,#recommed_client').click(function(){
+            window.location.href="/agent/client_list/";
+        })
+        $('#bind_account').click(function(){
+            window.location.href="/agent/bind_account/";
+        })
+
+    })
+</script>
+</body>
+</html>
