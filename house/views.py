@@ -99,7 +99,10 @@ def login(request,template_name):
     return render(request,template_name,args)
 
 def test(request):
-    from common.excel import create_excel
-    create_excel()
-    return HttpResponse('successs')
+    try:
+        from common.excel import create_excel
+        create_excel()
+        return HttpResponse('successs')
+    except Exception as e:
+        logging.exception(e.message)
     
