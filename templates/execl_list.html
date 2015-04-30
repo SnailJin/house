@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/app.css"/>
+    <title>excel文件列表</title>
+    <style>
+        body{
+            background-color: rgb(235, 235, 235);
+            min-height: 700px;
+        }
+        .container>.row{
+            background-color: white;
+            padding: 5px;
+
+        }
+        .avatar{
+            border-radius: 20px;
+        }
+        .line{
+            width: 100%;
+            height: 1.5px;
+            font-size: 0px;
+            background-color:  rgb(235, 235, 235);
+            margin-bottom: 8px;
+        }
+        p,font{
+            line-height: 9px;
+        }
+        center{
+            position: relative;
+            top:90%;
+        }
+        #add_client{
+            margin-top: 20px;
+            width: 100%;
+            position: fixed;
+            bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-12">
+            <font>文件</font>
+        </div>
+    </div>
+    <div class="row">
+        <div class="line"></div>
+    </div>
+    {%for execl in execl_list %}
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="/agent/download/{{execl}}">{{execl}}</a>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</body>
+</html>
