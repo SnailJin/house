@@ -7,13 +7,15 @@
     <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <style>
-        body{  /*vbackground-image:url(/static/img/background.jpg);
-            background-repeat: no-repeat;
-            background-size: 100% 100% ;
-            -webkit-background-size:100%  100% ;
-            background-position: center;
-            height:700px;*/
+        html{
+            background:url('/static/img/background.jpg') no-repeat center center;
+            min-height:100%;
+            background-size:cover;
         }
+        body{
+            min-height:100%;
+        }
+
         .btn-in{
             background-color:rgba(255, 245, 62,100);
             border-color:rgba(255, 245, 62,100);
@@ -24,21 +26,18 @@
             color: red;
             font-size: large;
         }
-        .content{
-
-        }
     </style>
     <title>全民经纪人</title>
 </head>
 <body>
-    <div id="background" style="position:absolute;z-index:-1;width:100%;height:100%;top:0px;left:0px;">
-        <img src="/static/img/background.jpg" width="100%" height="100%"/>
-    </div>
-    <center id="background" style="position:absolute;;width:100%;height:100%;top:0px;left:0px;">
-        <center style="margin-bottom: 20px;margin-top: 85%;"><button id="income" class="btn btn-default btn-in">立即进入</button></center>
-        <center ><button id="introduction" class="btn btn-default btn-in">查看详情</button></center>
-    </center>
-    
+<!--<div class="container">-->
+    <!--&lt;!&ndash;<div id="background" style="position:absolute;z-index:-1;width:100%;height:100%;top:0px;left:0px;">&ndash;&gt;-->
+        <!--&lt;!&ndash;<img src="/static/img/background.jpg" width="100%" height="100%"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--<center style="position: relative;top: 80%"><button id="income" class="btn btn-default btn-in">立即进入</button></center>-->
+    <!--<center style="position: relative;top: 81%"><button id="introduction" class="btn btn-default btn-in">查看详情</button></center>-->
+
+<!--</div>-->
 <script>
     $(function(){
        $('#income').click(function(){
