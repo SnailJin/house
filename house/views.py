@@ -64,6 +64,7 @@ def execl_list(request,template_name):
     try:
         path=os.path.join(os.path.dirname(MEDIA_ROOT),'xslx').replace('\\','/')
         listfile=os.listdir(path)
+        listfile.sort(reverse=True)
         args['execl_list']=listfile 
     except Exception as e:
         logging.error(e.message)
