@@ -5,6 +5,8 @@ Created on 2014年12月23日
 @author: jin
 '''
 from django.conf.urls import patterns, url
+import os
+from house.settings import MEDIA_ROOT
 urlpatterns=patterns('apps.agent.views',
      url(r'^profile/$', 'profile'),
      url(r'^client_list/$', 'client_list'),
@@ -15,5 +17,6 @@ urlpatterns=patterns('apps.agent.views',
      url(r'^introduction/$', 'introduction'),
      url(r'^public_weixin_authorization_url/$', 'public_weixin_authorization_url'),
      url(r'^public_weixin_authorization/$', 'public_weixin_authorization'),
+     url(r'^download/([0-9\-]*\.xlsx)/$', 'download_xlsx',),
      
 )

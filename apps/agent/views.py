@@ -14,6 +14,7 @@ from django.utils import simplejson
 from house.settings import PublicWeiXinAppID, PublicWeiXinAppSecret,\
     PublicWeiXinRedirectUri, DEFAULT_PAWORD
 from django.contrib import auth
+import os
 def profile(request,template_name="profile.html"):
     args={}
     try:
@@ -144,3 +145,24 @@ def public_weixin_authorization(request):
     
 def introduction(request,template_name="introduction.html"):
     return render(request,template_name)
+
+def download_xlsx(request,myfile):
+    '''
+     绑定账户
+    '''
+    args={'result':'success'}
+    try:
+        from django.core.servers.basehttp import FileWrapper
+        from house.settings import MEDIA_ROOT
+        response = HttpResponse(FileWrapper(file(os.path.join(os.path.dirname(MEDIA_ROOT),'xslx/%s'%(myfile)).replace('\\','/'))), content_type='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=%s'%(myfile)
+        return response        
+    except  Exception as e:
+        args={'result':'error','error_message':e.message}
+        template_name="error.html"
+    if request.is_ajax():
+        json=simplejson.dumps(args)
+        return HttpResponse(json)
+    else:
+        return render(request,template_name,args)
+

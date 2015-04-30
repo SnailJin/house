@@ -5,21 +5,15 @@ Created on Jul 4, 2013
 @author: jin
 '''
 
-# from django.contrib import admin
-# class SchoolAdmin(admin.ModelAdmin):
-#     list_display = ('ranking', 'name', 'type', )
-# 
-#     search_fields = ('name',)
-# #     filter_horizontal = ('user',)  ManyToManyField
-#     list_filter = ('type',)
-# 
-# class TagAdmin(admin.ModelAdmin):
-#     list_display = ('content', )
-# 
-#     search_fields = ('content',)
-#     list_filter = ('group','value')
-#     
-# admin.site.register(School,SchoolAdmin)
-# admin.site.register(Tag,TagAdmin)
+from django.contrib import admin
+from apps.agent.models import Client, RecommendRecord
+class ClientAdmin(admin.ModelAdmin):
+    search_fields = ('username','user_username','IDCard')
+ 
+class RecommendRecordAdmin(admin.ModelAdmin):
+     search_fields = ('user_username','client_username')
+    
+admin.site.register(Client,ClientAdmin)
+admin.site.register(RecommendRecord,RecommendRecordAdmin)
 
 

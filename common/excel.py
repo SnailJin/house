@@ -20,7 +20,7 @@ def create_excel():
     time=now.strftime('%Y-%m-%d')
     date_from = datetime.datetime(now.year, now.month, now.day-1, 0, 0, 0)
     date_to = datetime.datetime(now.year, now.month, now.day, 0, 0, 0)
-    filePath=os.path.join(PATH,'xslx/全民经纪人-%s.xlsx'%(time)).replace('\\','/')
+    filePath=os.path.join(PATH,'xslx/%s.xlsx'%(time)).replace('\\','/')
     workbook = xlsxwriter.Workbook(filePath)
     #推荐人
     headersList=['姓名','性别','身份证号','联系方式','银行卡卡号','注册时间']

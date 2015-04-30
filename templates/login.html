@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/app.css"/>
+    <title>登录</title>
+    <style>
+        body{
+            background-color: rgb(235, 235, 235);
+        }
+        .error{
+            color: red;
+            font-size: smaller;
+        }
+        .container{
+            margin-top: 20px;
+        }
+
+        button{
+            margin-top: 30px;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<form method="POST" action="{{request.path}}">
+    {% csrf_token %}
+    <div class="container">
+
+        <div class="row" >
+            <center><h3>登录</h3></center>
+        </div>
+        {%if error_message%} <div class="alert alert-danger" role="alert">{{error_message}}</div>{% endif %}
+        <div class="form-group row" >
+            <div class="col-xs-4">
+                <label>用户名:</label>
+            </div>
+            <div class="col-xs-8">
+                {{authenticationForm.username}}
+                {%if authenticationForm.username.errors%}
+                <label class="error" for="inputError2">{{authenticationForm.username.errors.0}}</label>
+                {%endif%}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-4">
+                <label>密码:</label>
+            </div>
+            <div class="col-xs-8">
+                {{authenticationForm.password}}
+                {%if authenticationForm.password.errors%}
+                <label class="error" for="inputError2">{{authenticationForm.password.errors.0}}</label>
+                {%endif%}
+            </div>
+        </div>
+
+    <button class="btn btn-success">登录</button>
+</form>
+</body>
+</html>

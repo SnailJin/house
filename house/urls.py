@@ -4,7 +4,7 @@ from django.contrib import admin
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
-# admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,9 +17,12 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^agent/', include('apps.agent.urls')),
+    url(r'^login/', 'house.views.login',{"template_name":'login.html'}),
+    url(r'^execl_list/$', 'house.views.execl_list',{'template_name':'execl_list.html'}),
     url(r'^$', 'house.views.index',{'template_name':'index.html'}),
      url(r'^update_profile/$', 'house.views.update_profile',{'template_name':'update_profile.html'}),
      url(r'^test/$', 'house.views.test'),
+     
 )
 if settings.DEBUG:
    urlpatterns += patterns('',
