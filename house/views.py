@@ -29,17 +29,19 @@ def update_profile(request,template_name):
     try:
         if request.method=='POST':
             userProfileForm=UserProfileForm(request.POST)
+            user=auth.authenticate(username='oFP0btwgYGn81VzfxG_x8H8jDihA',password=DEFAULT_PAWORD)
+            auth.login(request, user)
             if userProfileForm.is_valid():
                 username=userProfileForm.cleaned_data['username']
                 uid=request.session.get('uid')
                 user=User(first_name=username,username=uid,password=make_password(DEFAULT_PAWORD))
                 userProfile=userProfileForm.save(commit=False)
-                user.save()
+#                 user.save()
                 user=auth.authenticate(username=uid,password=DEFAULT_PAWORD)
                 auth.login(request, user)
                 userProfile.uid=uid
                 userProfile.user=request.user
-                userProfile.save()
+#                 userProfile.save()
                 return HttpResponseRedirect('/agent/profile/')
             else:
                 args['userProfileForm']=userProfileForm

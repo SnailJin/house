@@ -40,10 +40,10 @@
 <body>
 <div class="container">
     <div class="row" >
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <img class="avatar" src="./img/image001.png" width="60px"  height="60px">
         </div>
-        <div class="col-xs-9">
+        <div class="col-xs-8">
             <div class="row">
                 <p class="username">{{username}}</p>
                 <p class="phone">{{phone}}</p>
@@ -71,12 +71,15 @@
             <p>绑定账户<font style="float: right;color: red;">&#62; </font></p>
         </div>
     </div>
-    <center><button id="recommed_client" class="btn btn-danger">推荐客户</button></center>
+    <center><button id="recommed_client" class="btn btn-danger">我要推荐</button></center>
 </div>
 <script>
     $(function(){
-        $('.client,#recommed_client').click(function(){
+        $('.client').click(function(){
             window.location.href="/agent/client_list/";
+        })
+        $('#recommed_client').click(function(){
+            window.location.href="/agent/add_client/recommend";
         })
         $('#bind_account').click(function(){
             window.location.href="/agent/bind_account/";

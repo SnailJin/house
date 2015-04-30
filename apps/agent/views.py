@@ -12,7 +12,8 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 import re
 from django.utils import simplejson
 from house.settings import PublicWeiXinAppID, PublicWeiXinAppSecret,\
-    PublicWeiXinRedirectUri
+    PublicWeiXinRedirectUri, DEFAULT_PAWORD
+from django.contrib import auth
 def profile(request,template_name="profile.html"):
     args={}
     try:
@@ -27,24 +28,32 @@ def profile(request,template_name="profile.html"):
         template_name="error.html"
     return render(request,template_name,args)
         
-def add_client(request,template_name="add_client.html"):
+def add_client(request,channel=None,template_name="add_client.html"):
     '''
     添加客户
     '''
-    args={}
+    args={'title':'我要推荐','button':'提交'} if  channel=='recommend' else {'title':'添加客户','button':'提交'}
     try:
         if request.method=="POST":
             clientForm=ClientForm(request.POST)
             if clientForm.is_valid():
-#                 if UserProfile.objects.filter(user=request.user,IDCard=clientForm.cleaned_data["IDCard"]).exists():
-#                     from django.forms.util import ErrorList
-#                     errors = clientForm._errors.setdefault("IDCard", ErrorList())
-#                     errors.append(u"该身份证已经添加过!")
-#                     args['clientForm']=clientForm
-#                 else:
+                if Client.objects.filter(user=request.user,IDCard=clientForm.cleaned_data["IDCard"]).exists():
+                    if channel !='recommend':
+                        from django.forms.util import ErrorList
+                        errors = clientForm._errors.setdefault("IDCard", ErrorList())
+                        errors.append(u"该身份证已经添加过!")
+                        args['clientForm']=clientForm
+                    else:
+                        client=Client.objects.get(user=request.user,IDCard=clientForm.cleaned_data["IDCard"])
+                        RecommendRecord(user=request.user,client=client).save()
+                        return HttpResponseRedirect('/agent/client_list/')
+                else:
                     client=clientForm.save(commit=False)
                     client.user=request.user 
                     client.save()
+                    if channel=='recommend':
+                        client=Client.objects.get(user=request.user,IDCard=clientForm.cleaned_data["IDCard"])
+                        RecommendRecord(user=request.user,client=client).save()
                     return HttpResponseRedirect('/agent/client_list/')
             else:
                 args['clientForm']=clientForm
@@ -123,6 +132,8 @@ def public_weixin_authorization(request):
     client = WeiXinClient(client_id=PublicWeiXinAppID,client_secret=PublicWeiXinAppSecret,redirect_uri=PublicWeiXinRedirectUri)
     access=client.request_access_token(request.GET.get('code'))
     if UserProfile.objects.filter(uid=client.openid).exists():
+        user=auth.authenticate(username=client.openid,password=DEFAULT_PAWORD)
+        auth.login(request, user)
         return HttpResponseRedirect('/agent/profile/')
     else:
         request.session.update({'uid':client.openid,})

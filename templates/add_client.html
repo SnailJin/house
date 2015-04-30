@@ -29,11 +29,11 @@
     </style>
 </head>
 <body>
-<form method="POST" action="/agent/add_client/">
+<form method="POST" action="{{request.path}}">
     {% csrf_token %}
     <div class="container">
         <div class="row" >
-            <center><h3>添加客户</h3></center>
+            <center><h3>{{title}}</h3></center>
         </div>
         <div class="form-group row" >
             <div class="col-xs-4">
@@ -80,7 +80,7 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-success">提交信息</button>
+    <button class="btn btn-success">{{button}}</button>
 </form>
 </body>
 </html>
