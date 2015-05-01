@@ -18,8 +18,8 @@ sys.setdefaultencoding('utf8')
 def create_excel():
     now=datetime.datetime.now()
     time=now.strftime('%Y-%m-%d')
-    date_from = datetime.datetime(now.year, now.month, now.day-1, 0, 0, 0)
     date_to = datetime.datetime(now.year, now.month, now.day, 0, 0, 0)
+    date_from=date_to-datetime.timedelta(1)
     filePath=os.path.join(os.path.dirname(MEDIA_ROOT),'xslx/%s.xlsx'%(time)).replace('\\','/')
     workbook = xlsxwriter.Workbook(filePath)
     #推荐人
