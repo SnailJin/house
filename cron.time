@@ -1,0 +1,3 @@
+#!/bin/sh
+p=$PWD
+/usr/bin/python27 $p/manage.py task cal_income
